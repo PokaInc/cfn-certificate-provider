@@ -1,0 +1,12 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: S3 bucket required to host Lambda code for cfn-resource-provider
+Resources:
+  CodeBucket:
+    Type: AWS::S3::Bucket
+
+Outputs:
+  CfnCertificateProviderCodeBucket:
+    Value: !Ref CodeBucket
+    Export:
+      Name: CfnCertificateProviderCodeBucket

@@ -15,20 +15,20 @@ Resources:
     Properties:
       DomainName: !Ref DomainName
       ValidationMethod: DNS
-      ServiceToken: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:binxio-cfn-certificate-provider'
+      ServiceToken: !ImportValue CFNCustomProviderArn
 
   IssuedCertificate:
     Type: Custom::IssuedCertificate
     Properties:
       CertificateArn: !Ref Certificate
-      ServiceToken: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:binxio-cfn-certificate-provider'
+      ServiceToken: !ImportValue CFNCustomProviderArn
 
   CertificateDNSRecord:
     Type: Custom::CertificateDNSRecord
     Properties:
       CertificateArn: !Ref Certificate
       DomainName: !Ref DomainName
-      ServiceToken: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:binxio-cfn-certificate-provider'
+      ServiceToken: !ImportValue CFNCustomProviderArn
 
   DomainValidationRecord:
     Type: AWS::Route53::RecordSetGroup

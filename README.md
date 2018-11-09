@@ -29,12 +29,9 @@ Checkout the sample in [cloudformation/demo-stack.yaml](cloudformation/demo-stac
 To install this custom resource, type:
 
 ```sh
-aws cloudformation create-stack \
-	--capabilities CAPABILITY_IAM \
-	--stack-name cfn-certificate-provider \
-	--template-body file://cloudformation/cfn-resource-provider.yaml 
-
-aws cloudformation wait stack-create-complete  --stack-name cfn-certificate-provider 
+make deploy-code-bucket
+make deploy-code
+make deploy-cfn-certificate-provider
 ```
 
 This CloudFormation template will use our pre-packaged provider from `s3://binxio-public-${AWS_REGION}/lambdas/cfn-certificate-provider-0.2.1.zip`.
