@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Custom CFN Certificate Provider with DNS validation support
+Description: Custom CFN Certificate Provider with DNS validation support. See https://github.com/PokaInc/cfn-certificate-provider for more information.
 Parameters:
   Version:
     Type: String
