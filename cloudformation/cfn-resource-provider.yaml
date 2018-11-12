@@ -27,7 +27,7 @@ Resources:
             Action:
             - lambda:InvokeFunction
             Resource:
-            - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:binxio-cfn-certificate-provider'
+            - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:cfn-certificate-provider'
           - Effect: Allow
             Action:
               - logs:*
@@ -55,7 +55,7 @@ Resources:
       Code:
         S3Bucket: !ImportValue CfnCertificateProviderCodeBucket
         S3Key: !Sub 'lambdas/cfn-certificate-provider-${Version}.zip'
-      FunctionName: binxio-cfn-certificate-provider
+      FunctionName: cfn-certificate-provider
       Handler: provider.handler
       MemorySize: 128
       Role: !GetAtt 'LambdaRole.Arn'
