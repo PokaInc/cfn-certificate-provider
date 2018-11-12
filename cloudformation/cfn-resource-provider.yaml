@@ -1,13 +1,10 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Custom CFN Certificate Provider with DNS validation support
+Description: Custom CFN Certificate Provider with DNS validation support. See https://github.com/PokaInc/cfn-certificate-provider for more information.
 Parameters:
-  S3BucketPrefix:
+  Version:
     Type: String
-    Default: 'binxio-public'
-  CFNCustomProviderZipFileName:
-    Type: String
-    Default: 'lambdas/cfn-certificate-provider-0.2.1.zip'
+    Default: 'latest'
 Resources:
   LambdaPolicy:
     Type: AWS::IAM::Policy
@@ -30,7 +27,7 @@ Resources:
             Action:
             - lambda:InvokeFunction
             Resource:
-            - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:binxio-cfn-certificate-provider'
+            - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:cfn-certificate-provider'
           - Effect: Allow
             Action:
               - logs:*
@@ -56,11 +53,17 @@ Resources:
     Properties:
       Description: CFN Certificate Domain Resource Record Provider
       Code:
-        S3Bucket: !Sub '${S3BucketPrefix}-${AWS::Region}'
-        S3Key: !Ref 'CFNCustomProviderZipFileName'
-      FunctionName: binxio-cfn-certificate-provider
+        S3Bucket: !ImportValue CfnCertificateProviderCodeBucket
+        S3Key: !Sub 'lambdas/cfn-certificate-provider-${Version}.zip'
+      FunctionName: cfn-certificate-provider
       Handler: provider.handler
       MemorySize: 128
       Role: !GetAtt 'LambdaRole.Arn'
       Runtime: python3.6
       Timeout: 300
+
+Outputs:
+  CfnCertificateProviderLambdaArn:
+    Value: !GetAtt CFNCustomProvider.Arn
+    Export:
+      Name: CfnCertificateProviderLambdaArn
