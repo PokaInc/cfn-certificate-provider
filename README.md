@@ -34,9 +34,6 @@ make deploy-code
 make deploy-cfn-certificate-provider
 ```
 
-This CloudFormation template will use our pre-packaged provider from `s3://binxio-public-${AWS_REGION}/lambdas/cfn-certificate-provider-0.2.1.zip`.
-
-
 ## Demo
 To install the simple sample of the Custom Resource, type:
 
