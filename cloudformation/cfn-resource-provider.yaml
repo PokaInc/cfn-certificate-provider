@@ -63,7 +63,7 @@ Resources:
       Timeout: 300
 
 Outputs:
-  CFNCustomProviderArn:
+  CfnCertificateProviderLambdaArn:
     Value: !GetAtt CFNCustomProvider.Arn
     Export:
-      Name: CFNCustomProviderArn
+      Name: CfnCertificateProviderLambdaArn
