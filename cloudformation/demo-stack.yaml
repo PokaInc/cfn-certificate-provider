@@ -4,10 +4,8 @@ Description: Demo Certificate DNS Record Provider
 Parameters:
   HostedZoneId:
     Type: String
-    Default: 'Z2U25GDT473TGQ'
   DomainName:
     Type: String
-    Default: 'demo.binx.cloud'
 
 Resources:
   Certificate:
